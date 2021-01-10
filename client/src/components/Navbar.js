@@ -48,14 +48,6 @@ function Navbar({ isLoggedIn }) {
           </Link>
           <Link
             className={classes.link}
-            to="/"
-            component={Button}
-            color="inherit"
-          >
-            Home
-          </Link>
-          <Link
-            className={classes.link}
             to="/events"
             component={Button}
             color="inherit"

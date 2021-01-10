@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { setUpProfile } from "../../redux/actions/usersActions";
 import AddIcon from "@material-ui/icons/Add";
 import AddPetDialog from "./AddPetDialog";
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Profile(props) {
-  const { events, pets, adoptedPets, setUpProfile, currentUser } = props;
+  const { events, pets, adoptedPets, setUpProfile, currentUser, isLoggedIn } = props;
   const [dialogOpen, setDialogOpen] = useState(false);
   const classes = useStyles();
 
@@ -62,13 +63,24 @@ function Profile(props) {
       setUpProfile();
     }
   });
+
+  if (isLoggedIn === false) {
+    return (
+      <Redirect to='/login' />
+    )
+  }
+
   return (
     <Container className={classes.root} maxWidth="lg">
       <section className={classes.section}>
+          {currentUser && currentUser.name ?
         <Typography variant="h4">
           <Avatar className={classes.avatar}>{currentUser.name[0]}</Avatar>
           {currentUser.name}
         </Typography>
+        :
+        ''
+        }
       </section>
       <section className={classes.section}>
         <Typography variant="h4" className={classes.sectionTitle}>
@@ -169,8 +181,8 @@ function Profile(props) {
 
 const mapStateToProps = (state) => {
   const { events, pets, adoptedPets } = state.user;
-  const { currentUser } = state.auth;
-  return { events, pets, adoptedPets, currentUser };
+  const { currentUser, isLoggedIn } = state.auth;
+  return { events, pets, adoptedPets, currentUser, isLoggedIn };
 };
 
 export default connect(mapStateToProps, { setUpProfile })(Profile);

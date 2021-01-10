@@ -48,7 +48,10 @@ function App({ isLoggedIn, currentUser }) {
             <Route exact path="/events">
               <Events />
             </Route>
-            <PrivateRoute exact path="/profile">
+            <PrivateRoute path="/profile">
+              <Profile />
+            </PrivateRoute>
+            <PrivateRoute exact path="/">
               <Profile />
             </PrivateRoute>
             <PrivateRoute exact path="/match/:petId">
@@ -57,9 +60,6 @@ function App({ isLoggedIn, currentUser }) {
             <PrivateRoute exact path="/adoption-pets">
               <AdoptionPets />
             </PrivateRoute>
-            <Route path="/">
-              <p>Home</p>
-            </Route>
           </Switch>
         </Router>
       </ThemeProvider>

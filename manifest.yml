@@ -1,5 +1,15 @@
 ---
 applications:
-  - name: pets-network
-    memory: 64M
-    buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+- buildpack: sdk-for-nodejs
+  command: npm start
+  domain: null
+  env:
+    OPTIMIZE_MEMORY: true
+  host: null
+  instances: 1
+  memory: 64M
+  name: pets-network
+  random-route: true
+  routes:
+  - route: https://pets-network.eu-gb.cf.appdomain.cloud
+  timeout: 180

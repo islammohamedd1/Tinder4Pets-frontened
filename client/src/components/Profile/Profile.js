@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Button,
   Card,
   CardContent,
   CardMedia,
@@ -15,7 +16,7 @@ import { connect } from "react-redux";
 import { setUpProfile } from "../../redux/actions/usersActions";
 import AddIcon from "@material-ui/icons/Add";
 import AddPetDialog from "./AddPetDialog";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -118,6 +119,17 @@ function Profile(props) {
                     <Typography variant="subtitle2" color="textSecondary">
                       {p.lookingForMatch ? "Looking" : "Not looking"} for match
                     </Typography>
+                    {p.lookingForMatch ?
+                    <Link
+                      component={Button}
+                      size="small"
+                      color="primary"
+                      variant="contained"
+                      to={`/match/${p._id}`}
+                      >
+                          See matches
+                        </Link>
+                    : ''}
                   </CardContent>
                 </Card>
               </Grid>
